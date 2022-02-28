@@ -1,14 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <div class="feed">
-  <div class="userInfo"><%= current_user.username%><br><%=current_user.posts.count%>Posts</div>
+  <div class="user-info">
+    <span class="username"><%= current_user.username %></span><br>
+    <span class="info"><%=current_user.posts.count%> Posts</span>
+  </div>
   <div class="posts">
     <% @posts.each do |post|%>
       <div class="post">
           <div class="post-top">
-              <h1><%= post.user.username %></h1>
+              <span class="post-username"><%= post.user.username %></span>
               <% if current_user.id == post.user.id%>
-                <span><%= link_to 'Edit', edit_post_path(post) %></span>
+                <span><%= link_to 'Edit', edit_post_path(post), class: "post-edit" %></span>
               <% end %>
           </div>
           <div class="post-body">
@@ -21,7 +24,8 @@
                   <%= button_to "Like", likes_path, params: { like: { post_id: post.id}}, method: :post %>
                 <% else %>
                   <%= button_to "Unlike", like_path(like), method: :delete %>
-                <% end %></div>
+                <% end %>
+              </div>
             <div class="comment">
             <%= link_to post do %>
               <%= post.comments.count%> comments
