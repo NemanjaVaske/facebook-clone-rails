@@ -19,6 +19,13 @@
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= post.likes.count%> likes
+        <% like = current_user.likes.find_by(post: post) %>
+        <% if like.nil? %>
+          <%= button_to "Like", likes_path, params: { like: { post_id: post.id}}, method: :post %>
+        <% else %>
+          <%= button_to "Unlike", like_path(like), method: :delete %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
