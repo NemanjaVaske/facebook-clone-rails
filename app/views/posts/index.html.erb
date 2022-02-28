@@ -5,7 +5,9 @@
     <span class="username"><%= current_user.username %></span><br>
     <span class="info"><%=current_user.posts.count%> Posts</span>
   </div>
+
   <div class="posts">
+    <%= render 'form', post: @post %>
     <% @posts.each do |post|%>
       <div class="post">
           <div class="post-top">
@@ -37,7 +39,3 @@
     <% end %>
   </div>
 </div>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
