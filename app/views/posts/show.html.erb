@@ -20,7 +20,7 @@
 
 <p>
   <strong>Comments:</strong>
-  <%= render @post.comments%>
+  <%= render @post.comments.order("id DESC")%>
   <%= render partial: 'comments/form', locals: { post: @post } %>
 </p>
 <% if current_user.id == @post.user_id%>
